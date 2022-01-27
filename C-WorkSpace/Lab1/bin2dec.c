@@ -2,6 +2,16 @@
 #include <stdlib.h>
 #include <math.h>
 
+/**
+ * @brief This program takes decimal numbers and convert its equivalent base 2
+ * @author Hasib Yosufi
+ * 
+ * Professor: Surbhi Bahri
+ * Due date: Jan/23/2022
+ * 
+ * 
+ * @return int 
+ */
 int main(int argv, char* argc[])
 {
 
