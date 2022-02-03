@@ -3,28 +3,45 @@
 #include <string.h>
 #include <time.h>
 
-int main() {
+
+
+/**
+ * @brief This program reads an encrypted message and rotation key from the user
+ *        validate the rotation key and decrypt the message
+ *
+ * @return int
+ *
+ * @author Hasibullah Yosufi
+ *
+ * Due date: Feb/6th/2022
+ *
+ * Assessment: lab2
+ */
+
+int main()
+{
+#pragma warning (disable : 4996)
 
 
 
-	
-	
 
+
+	/* message to decrypt */
 	char* p_decptMsg;
 
 
-	//rotation key to dcrypte the messge 
 	int rotationKey;
 
-	//to collect invalid input from the buffer input 
+	/* to collect invalid input from the buffer input */
 	int gcCollector;
 
 
-	//allocate 65 byts of memory type char
-	p_decptMsg = (char*)malloc(sizeof(char) * 65);
+	/*allocate 65 byts of memory type char */
+	p_decptMsg = (char*)malloc(sizeof(char) * 80);
 
 
-	//checks if requeste memory is allocated exit program if not 
+
+	/*checks if requeste memory is allocated exit program if not */
 	if (p_decptMsg == NULL) {
 
 		puts("Error..could not allocate memory!");
@@ -32,66 +49,77 @@ int main() {
 	}
 
 
+	int temp;
 	printf("Enter the message to decrypt: ");
 
 
-	//reads from user including spaces
-	fgets(p_decptMsg, 64, stdin);
-
-
-	//remove new line created by fgets()
-	p_decptMsg[strlen(p_decptMsg) - 1] = 0;
-
+	/*reads from user including spaces */
 	
+	int scanRet = scanf("%79[^\n]c", p_decptMsg);
+
+	/*Clear if buffer overflow happen */
+	char clearBuff;
+	while (clearBuff = getchar() != '\n');
 
 
-	printf("Enter rotation key");
+
+
+
+
+
+	/*asks for rotation number  */
+
+	printf("Enter rotation key: ");
+
 
 	scanf("%d", &rotationKey);
 
 
-	//checks rotation key to be in the range of 0 - 26
+	/*checks rotation key to be in the range of 0 - 26 */
 	if (rotationKey > 26) {
 		rotationKey = -1;
 	}
 
 
-
+	/*iterate until the user enter a valid input */
 	while (!(rotationKey > -1) && !(rotationKey > 26))
 	{
-		//to collect garbage values from input buffer
+		/*to collect garbage values from input buffer */
 		gcCollector = 0;
-		printf("Error..Key must be between 1 to 26\ntry again: ");
-		
+		printf("Error..Key must be between 0 to 26\ntry again: ");
+
+		/*itereate until all the dummy values are cleared from the buffer input */
 		while (gcCollector != EOF && gcCollector != '\n') {
 			gcCollector = getchar();
 		}
-		
-		//reads after invalid input from user
+
+		/*reads after invalid input from user */
 		scanf("%d", &rotationKey);
 
 
-		//checks rotation key to be in the range of 0 - 26
+		/*checks rotation key to be in the range of 0 - 26 */
 		if (rotationKey > 26) {
 			rotationKey = -1;
 		}
-		
+
 
 	}
 
 
 	int length = strlen(p_decptMsg);
 
-	for (int i = 0; i < length; i++) {
+	/*decrypt the user input message by subtracting rotation key from all the chars */
+	int i = 0;
+	for (; i < length; i++) {
 
 		*(p_decptMsg + i) -= rotationKey;
 	}
 
-	//display decrypted message
+	/*display decrypted message*/
 	puts(p_decptMsg);
 
 
 
 	return(EXIT_SUCCESS);
-	
+
 }
