@@ -88,7 +88,7 @@ int main(void)
         /*to collect the garbage value from the input buffer */
         clctGarbg = 0;
 
-        printf("Error...Key must be 1 to 26\ntry again: ");
+        printf("Error...Key must be 0 to 26\ntry again: ");
 
 
         /* iterate until the input buffer reches to its end */
