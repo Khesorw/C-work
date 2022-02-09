@@ -1,13 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define NUM_MAX 234
+#include "Hello.h"
 
 int main(void){
 
     
+    printf("%s\n",NAME);
 
+ 
+    int adddf = sum(23,23);
 
-    printf("Hello world\n");
+   
+    printf("Hello world\n%d\n",adddf);
 
     return (0);
 }
