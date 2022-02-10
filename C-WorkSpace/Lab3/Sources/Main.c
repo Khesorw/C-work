@@ -40,12 +40,23 @@ void init_stuTable(){
  printf("Please enter the number of students: ");
     scanf("%d",&numStudents);
 
+    while (!(numStudents > -1))
+    {
+        gcCollector = 0;
+        printf("Error...numstudent should be number: ");
+        while (gcCollector != EOF && gcCollector != '\n') {
+			gcCollector = getchar();
+		}
+        scanf("%d",&numStudents);
+    }
+    
 
 
 
 
 
-    /*allocate memory based on the userinput (number of students) */
+
+    /* allocate memory based on the userinput (number of students) */
     studentID = (char **)calloc(numStudents,sizeof(char*));
 
    
