@@ -16,22 +16,43 @@ int** studentsTable;
 void init_stuTable();
 void freeAll();
 void init_courseTable();
-void registStudent();
+void init_regTable();
+void print_Menu();
+void print_regisTable();
+void registerStudent(void);
 
 
 int main(void){
+ 
+  init_stuTable();
 
-  
+  init_courseTable();
 
-    printf("Hello\n");
-
-     registStudent();
-
-
-
+  /*initialize registration table: */
+  init_regTable();
 
 
+    int userInput,gbCollector, valid_int;
 
+    while(1){
+
+        printf("Please choose one of the following actions\n");
+        print_Menu();
+        valid_int = scanf("%1d",&userInput);
+
+        switch (userInput)
+        {
+        case 1:
+        printf("Please enter the student ID: ");
+
+            break;
+        
+        default:
+            break;
+        }
+    }
+
+    
   
 
 
@@ -118,11 +139,13 @@ void init_stuTable(){
     }
 
 
+    printf("[ ");
     for(int i = 0; i < numStudents; i++){
 
-        printf("%s\n",studentID[i]);
+        printf("%s, ",studentID[i]);
     }
 
+    printf("]\n");
 
 }/* init_stuTable() */
 
@@ -171,10 +194,11 @@ int gcCollector,validInput = 0;
          printf("Please enter the course code for course %d: ",(i+1));
          scanf("%7[^\n]s",buffer);
          while((gcCollector=getchar()) != '\n');
-         courses[i] = strndup(buffer,5);
+         courses[i] = strndup(buffer,7);
     }
 
 
+      /* Format prints course code inside [  ] */
       printf("[ ");
     for(int i = 0; i < numCourses; i++){
       
@@ -182,8 +206,8 @@ int gcCollector,validInput = 0;
        
 
     }
-
      printf(" ]\n");
+
 
 
 
@@ -206,9 +230,9 @@ int gcCollector,validInput = 0;
 
 /* initialize student registeration table: */
 
-void registStudent(){
+void init_regTable(){
 
-    printf("Doing the registaation\n");
+
 
 studentsTable = (int**)malloc(sizeof(int*) * numStudents);
 
@@ -230,13 +254,51 @@ for(int i = 0; i < numStudents; i++){
  }//for()
 
 
-for(int i = 0; i < numStudents; i++){
-     for(int j = 0; j < numCourses; j++){
-         printf("%d\t",studentsTable[i][j]);
-     }
-     putchar('\n');
- }//for()
+
 
 
 
 }/*regiset Student*/
+
+
+
+void print_Menu(void){
+
+   printf("1- Register a student in a course\n");
+   printf("2- Drop student's course\n");
+   printf("3- print registration table\n");
+   printf("4- Quit\n");
+   printf("Please enter action number:\n");
+
+}
+
+void print_regisTable()
+{
+
+    printf("[ ");
+    for(int i = 0; i < numStudents; i++)
+    {
+        printf("[ ");
+     for(int j = 0; j < numCourses; j++)
+     {
+        // studentsTable[i][j] = -1;
+       printf("%d,",studentsTable[i][j]);
+     }
+     printf(" ]");
+     
+    }
+     printf(" ]\n"); 
+}
+
+void registerStudent(void){
+    int userInput,gbCollector,valid_Input = 0;
+    printf("Please enter the student ID: ");
+    valid_Input = scanf("%5d",&userInput);
+    while((gbCollector=getchar()) != '\n');
+
+    while(valid_Input == 0 || valid_Input == EOF){
+        pirntf("Error..expecting integer please enter integer");
+        
+    }
+
+}
