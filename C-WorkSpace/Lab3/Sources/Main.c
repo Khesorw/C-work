@@ -4,12 +4,19 @@
 #include "Hello.h"
 
 
- int numStudents = 0;
+ int numStudents;
  char **studentID;
+
+ int numCourses = 0;
+ char **courses;
+
 
 
 
 void init_stuTable();
+void freeAll();
+void init_courseTable();
+void registStudent();
 
 int main(void){
 
@@ -17,9 +24,9 @@ int main(void){
   
 
    
-    init_stuTable();
+   // init_stuTable();
 
-
+    init_courseTable();
  
 
 
@@ -30,29 +37,30 @@ int main(void){
 
 
 
+
+
+
 void init_stuTable(){
 
 
     /* garbage collector value: */
-    int gcCollector;
+    int gcCollector,inputValid=0;
 
 
  printf("Please enter the number of students: ");
-    scanf("%d",&numStudents);
+   inputValid = scanf("%d",&numStudents);
+  // while((gcCollector=getchar())!= '\n');
 
-    while (!(numStudents > -1))
+    while (inputValid < 1 || numStudents == 0)
     {
         gcCollector = 0;
         printf("Error...numstudent should be number: ");
         while (gcCollector != EOF && gcCollector != '\n') {
 			gcCollector = getchar();
 		}
-        scanf("%d",&numStudents);
+      inputValid = scanf("%d",&numStudents);
     }
     
-
-
-
 
 
 
@@ -63,12 +71,24 @@ void init_stuTable(){
    char clearBuff;
    while(clearBuff=getchar() != '\n');
 
+    int id_to_str = 0;
+
     
+   
+
+
     char buffer[6];
     for(int i = 0; i < numStudents; i++){
-        printf("Enter the id of student %d: ",(i+1));
-        scanf("%5[^\n]s",buffer);
-         while(clearBuff=getchar() != '\n');
+         printf("Enter the id of student %d: ",(i+1));
+          inputValid = scanf("%5d",&id_to_str);
+        while(id_to_str < 1 || id_to_str==0){
+         gcCollector = 0;
+        printf("Error...numstudent should be number: ");
+        while ((gcCollector=getchar())!= '\n');
+        inputValid = scanf("%5d",&id_to_str);
+
+        }
+        sprintf(buffer,"%d",id_to_str);
         studentID[i] = strndup(buffer,5);
       
 
@@ -81,4 +101,59 @@ void init_stuTable(){
     }
 
 
-}/*init_stuTable() */
+}/* init_stuTable() */
+
+
+
+/* initialize the course table */
+void init_courseTable(){
+
+//int numCourses = 0;
+// char **courses;
+
+int gcCollector,validInput = 0;
+
+
+ printf("How many course are you offering: ");
+
+ validInput = scanf("%1d",&numCourses);
+
+ while(validInput != 1 || (numCourses == 0 || numCourses < 0)){
+     printf("Invalid input! expecting an integer: ");
+     while((gcCollector=getchar()) != '\n' && gcCollector != EOF);
+     validInput = scanf("%d",&numCourses);
+    
+ }
+     while((gcCollector=getchar()) != '\n' && gcCollector != EOF);
+    
+    courses = (char **)malloc(sizeof(char*) * numCourses);
+
+    char buffer[8];
+
+    int i = 0;
+    for(;i < numCourses; i++){
+         printf("Please enter the course code for course %d: ",(i+1));
+         scanf("%7[^\n]s",buffer);
+         while((gcCollector=getchar()) != '\n');
+         courses[i] = strndup(buffer,5);
+    }
+
+
+      printf("[ ");
+    for(int i = 0; i < numCourses; i++){
+      
+        printf("%s,",courses[i]);
+       
+
+    }
+
+     printf(" ]\n");
+
+
+
+
+
+
+
+
+}/* init_courseTable()*/
