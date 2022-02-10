@@ -7,10 +7,10 @@
  int numStudents;
  char **studentID;
 
- int numCourses = 0;
+ int numCourses;
  char **courses;
 
-
+int** studentsTable;
 
 
 void init_stuTable();
@@ -18,20 +18,43 @@ void freeAll();
 void init_courseTable();
 void registStudent();
 
+
 int main(void){
 
-    
   
 
-   
-   // init_stuTable();
+    printf("Hello\n");
 
-    init_courseTable();
+     registStudent();
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+ 
  
 
 
-    return (0);
-}
+
+ return (0);
+}/* main() */
 
 
 
@@ -39,7 +62,7 @@ int main(void){
 
 
 
-
+/* initialize student id table: */
 void init_stuTable(){
 
 
@@ -105,6 +128,19 @@ void init_stuTable(){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* initialize the course table */
 void init_courseTable(){
 
@@ -157,3 +193,50 @@ int gcCollector,validInput = 0;
 
 
 }/* init_courseTable()*/
+
+
+
+
+
+
+
+
+
+
+
+/* initialize student registeration table: */
+
+void registStudent(){
+
+    printf("Doing the registaation\n");
+
+studentsTable = (int**)malloc(sizeof(int*) * numStudents);
+
+if(studentsTable == NULL){
+    puts("Memory erro: ");
+    exit(EXIT_FAILURE);
+}
+
+for(int i = 0; i < numStudents; i++){
+    *(studentsTable + i) = (int *)malloc(sizeof(int) * numCourses);
+
+}
+
+
+ for(int i = 0; i < numStudents; i++){
+     for(int j = 0; j < numCourses; j++){
+         studentsTable[i][j] = -1;
+     }
+ }//for()
+
+
+for(int i = 0; i < numStudents; i++){
+     for(int j = 0; j < numCourses; j++){
+         printf("%d\t",studentsTable[i][j]);
+     }
+     putchar('\n');
+ }//for()
+
+
+
+}/*regiset Student*/
