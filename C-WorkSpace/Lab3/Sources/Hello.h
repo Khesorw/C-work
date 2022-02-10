@@ -1,12 +1,9 @@
 
 #ifndef Hello
-    #define NAME "Hasibullah Yosufi"
-    #define AGE 21
+#define NAME "HASIBULLAH"
 
-    int sum(int x, int v){
-        return (x+v);
-    }
-    double sub(double,double);
+int sum(int, int);
+int sub(int, int);
 
-    #define Hello
+#define Hello
 #endif
