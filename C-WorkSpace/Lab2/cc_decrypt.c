@@ -20,7 +20,7 @@
 
 int main()
 {
-#pragma warning (disable : 4996)
+
 
 
 

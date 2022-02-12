@@ -66,6 +66,7 @@ int main(void)
     /*allocates memory for rotation sizeof(int)4,2,8 depends on the cpu */
     rotation = (int *)malloc(sizeof(int));
 
+    *rotation = -1;
 
     printf("Please enter the rotation key: ");
 
